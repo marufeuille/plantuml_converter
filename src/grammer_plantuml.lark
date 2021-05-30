@@ -1,0 +1,8 @@
+uml : start_uml [entity]+ end_uml
+start_uml : "@startuml" [/[\t\s]+/ identifier] [/[\t\s]+/] ["\n"]
+end_uml : "@enduml" ["\n"]
+entity: entity_sym [/[\t\s]+/] ["\""] identifier ["\""] /[\t\s]+/ "{" "\n" [table_field_schema]+ "}" [/[\t\s]+/] "\n"+
+table_field_schema: [/[\t\s]+/] [mandatory_flag /[\t\s]+/] identifier /[\t\s]+/ identifier [/[\t\s]+/] ["[" identifier "]"] "\n"
+identifier : /[a-zA-Z][0-9a-zA-Z_-]+/
+entity_sym : "entity"
+mandatory_flag : "*"

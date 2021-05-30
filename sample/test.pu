@@ -1,0 +1,9 @@
+@startuml test
+entity "test" {
+	* hello STRING
+	world INTEGER [FK]
+}
+entity "test2" {
+	hoge STRING
+}
+@enduml
