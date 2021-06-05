@@ -1,7 +1,7 @@
 from typing import List, Union
 from lark import Transformer, Token, Tree
 
-class ErToClassTransformer(Transformer):
+class ErToPyObjLarkTransformer(Transformer):
 
     def uml(self, tree:List[Union[Tree, Token]]):
         return tree[1]
@@ -22,9 +22,9 @@ class ErToClassTransformer(Transformer):
                 if node.data == "entity_sym":
                     pass
                 if node.data == "identifier":
-                    entity["name"] = node.children[0].value
+                    entity["name"] = node.children[0].value #type: ignore
                 if node.data == "table_field_schema":
-                    entity["table_field_schema"].append(self._table_field_schema(node.children))
+                    entity["table_field_schema"].append(self._table_field_schema(node.children)) # type: ignore
         return entity
 
     def _table_field_schema(self, tree: List[Union[Tree, Token]]):
@@ -35,13 +35,13 @@ class ErToClassTransformer(Transformer):
             "pk": False,
             "FK": False
         }
-        
+
         for node in tree:
             if type(node) is Tree:
                 if node.data == "mandatory_flag":
                     table_field_schema["mandatory"] = True
                 if node.data == "identifier":
-                    ident = node.children[0].value.upper()
+                    ident = node.children[0].value.upper() # type: ignore
                     if ident in ("INTEGER", "STRING", "DATE", ):
                         table_field_schema["type"] = ident
                     elif ident == "FK":
@@ -49,5 +49,5 @@ class ErToClassTransformer(Transformer):
                     elif ident == "PK":
                         table_field_schema["PK"] = True
                     else:
-                        table_field_schema["name"] = node.children[0].value
+                        table_field_schema["name"] = node.children[0].value # type: ignore
         return table_field_schema
