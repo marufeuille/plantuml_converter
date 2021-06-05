@@ -3,6 +3,6 @@
 		"*.ttml": "xml",
 		"*.ttss": "css"
 	},
-	"python.pythonPath": "/home/marufeuille/.cache/pypoetry/virtualenvs/plantuml-class-generator-t0ndzjrU-py3.7/bin/python",
+	"python.pythonPath": ".venv/bin/python",
 	"editor.insertSpaces": true
 }
